@@ -1,0 +1,20 @@
+功能：提供与第三方开发的接口新型通信需要的参数和签名
+
+
+生成步骤：
+1. 通过 random_array.js 生成乱序一个乱序的字符串和一个指定映射关系的数组
+2. 替换 crypto_sea_obfus_module.js 里的第一行开头的 c（上一条的字符串） 和 d（上一条的数组） 的值
+3. 拷贝一份到所需要用到的项目目录下供使用
+
+
+调用方式：
+seajs.use('path/生成的文件名字.js', function(){
+
+    // 调用 init 初始化，并传入用户的 uid
+    CryptoUtils.init(JSON.parse(sessionStorage.bili_login_status)[3]);
+
+    // 获取请求需要的参数
+    // return: {uid: '', timestamp: '', sign: ''}
+    CryptoUtils.getParams();
+
+});
